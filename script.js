@@ -44,8 +44,11 @@ function createObjects() {
 }
 
 // storage function, pushes obj array (days) to local storage
-function storage(days) {
-
+function storage(day) {
+  for (var i = 0; i < day.length; i++) {
+    var key = "hour" + day[i].slot);
+    localStorage.setItem(key, JSON.stringify(day[i]));
+  }
 }
 
 // checks the time, calls update every minute?
