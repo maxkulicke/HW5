@@ -1,0 +1,11 @@
+.past {
+  background-color: rgba(11, 92, 11, 0.418);
+}
+
+.present {
+  background-color: rgba(180, 1, 1, 0.377);
+}
+
+.future {
+  background-color: rgba(67, 67, 202, 0.555);
+}

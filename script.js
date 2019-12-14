@@ -5,7 +5,7 @@ setInterval(function () {
   // run every 60 seconds instead of every second?
   var now = getNow();
   $("#clock").text(now);
-  checkTime();
+  checkTime(now);
   display(day);
   return now;
 }, 1000);
@@ -30,7 +30,7 @@ function getHour() {
 // will create all of the HR objects
 function createObjects() {
   // get HR in here?
-  for (var i = 9; i < 17; i++) {
+  for (var i = 9; i < 18; i++) {
     var hour = {
       slot: i,
       past: false,
@@ -52,8 +52,7 @@ function storage(day) {
 }
 
 // checks the time, calls update every minute?
-function checkTime(time) {
-  var now = getNow;
+function checkTime(now) {
   var second = parseInt(now.charAt(6) + now.charAt(7));
   if (second == 0) {
     timeUpdate();
@@ -70,7 +69,8 @@ function timeUpdate() {
 }
 
 // will check and possibly update the past present future keys of the day obj
-function pastPresentFuture(day) {
+function pastPresentFuture(hour) {
+  // var hour = day[i];
   var hourNow = getHour();
   if (hour.slot < hourNow) {
     hour.past = true;
@@ -95,12 +95,32 @@ function pullDayFromStorage(day) {
 
 // will update the front end (somehow?)
 function display(day) {
-
+  // needs to loop through each hour, and update pastpresentfuture colors, throw up the hr slot, and list events
+  for (var i = 0; i < day.length; i++) {
+    var hour = day[i];
+    var id = "#hour" + hour.slot;
+    if (hour.past) {
+      $(id).toggleClass("past");
+    }
+    else if (hour.present) {
+      $(id).toggleClass("present");
+    }
+    else {
+      $(id).toggleClass("future");
+    }
+    // $(id).h5.text(hour.slot);
+  }
 }
 
 // will add user form input string (event) to hour obj [] of strings
 function push(hour, event) {
   hour.events.push(event);
+}
+
+createObjects();
+display(day);
+for (var i = 0; i < day.length; i++) {
+  console.log(day[i]);
 }
 
 
