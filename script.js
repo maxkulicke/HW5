@@ -1,5 +1,5 @@
 // global variables
-var day = [];
+var day = []; // an array of hour objects
 
 setInterval(function () {
   // run every 60 seconds instead of every second?
@@ -31,11 +31,11 @@ function getHour() {
 function createObjects() {
   // get HR in here?
   for (var i = 9; i < 17; i++) {
-    var hour = { 
-      slot: i, 
-      past: false, 
-      present: false, 
-      future: false, 
+    var hour = {
+      slot: i,
+      past: false,
+      present: false,
+      future: false,
       events: [],
     }
     day.push(hour);
@@ -46,7 +46,7 @@ function createObjects() {
 // storage function, pushes obj array (days) to local storage
 function storage(day) {
   for (var i = 0; i < day.length; i++) {
-    var key = "hour" + day[i].slot);
+    var key = "hour" + day[i].slot;
     localStorage.setItem(key, JSON.stringify(day[i]));
   }
 }
@@ -83,6 +83,16 @@ function pastPresentFuture(day) {
   }
 }
 
+function pullDayFromStorage(day) {
+  for (var i = 0; i < day.length; i++) {
+    var key = "hour" + day[i].slot;
+    var hour = JSON.parse(localStorage.getItem(key)); // will this work, or do i need two lines?
+    day[i] = hour;
+  }
+  return day;
+}
+
+
 // will update the front end (somehow?)
 function display(day) {
 
@@ -95,13 +105,13 @@ function push(hour, event) {
 
 
 // TEST JSON area
-var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+// var testObject = { 'one': 1, 'two': 2, 'three': 3 };
 
 // Put the object into storage
-console.log(JSON.stringify(testObject));
-localStorage.setItem('testObject', JSON.stringify(testObject));
+// console.log(JSON.stringify(testObject));
+// localStorage.setItem('testObject', JSON.stringify(testObject));
 
 // Retrieve the object from storage
-var retrievedObject = localStorage.getItem('testObject');
+// var retrievedObject = localStorage.getItem('testObject');
 
-console.log('retrievedObject: ', JSON.parse(retrievedObject));
+// console.log('retrievedObject: ', JSON.parse(retrievedObject));
