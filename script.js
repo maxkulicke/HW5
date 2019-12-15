@@ -17,6 +17,7 @@ setInterval(function () {
 // returns the current time (string type)
 function getNow() {
   var now = moment().format('HH:mm:ss: A');
+  // console.log("now return from getNow(): " + now);
   return now;
 }
 
@@ -24,6 +25,7 @@ function getNow() {
 function getHour() {
   var now = getNow();
   var hour = parseInt(now.charAt(0) + now.charAt(1));
+  console.log("hour return from getHour(): " + hour);
   return hour;
 }
 
@@ -61,25 +63,28 @@ function checkTime(now) {
 
 // will call pastPresentFuture(), display(); storage()
 function timeUpdate() {
-  for (var i = 0; i < day.length; i++) {
-    pastPresentFuture(day[i]);
+  // for (var i = 0; i < day.length; i++) {
+    pastPresentFuture(day);
     storage(day);
     display(day); // is this call needed?
-  }
+  // }
 }
 
 // will check and possibly update the past present future keys of the day obj
-function pastPresentFuture(hour) {
-  // var hour = day[i];
+function pastPresentFuture(day) {
   var hourNow = getHour();
-  if (hour.slot < hourNow) {
-    hour.past = true;
-  }
-  else if (hour.slot > hourNow) {
-    hour.future = true;
-  }
-  else {
-    hour.present = true;
+  console.log("hourNow (getHour() return within pastPresentFuture()) is: " + hourNow);
+  for (var i = 0; i < day.length; i++) {
+    var hour = day[i];
+    if (hour.slot < hourNow) {
+      hour.past = true;
+    }
+    else if (hour.slot > hourNow) {
+      hour.future = true;
+    }
+    else {
+      hour.present = true;
+    }
   }
 }
 
@@ -117,6 +122,7 @@ function push(hour, event) {
   hour.events.push(event);
 }
 
+debugger
 createObjects();
 display(day);
 for (var i = 0; i < day.length; i++) {
