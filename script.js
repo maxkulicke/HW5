@@ -104,6 +104,7 @@ function display(day) {
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
     var id = "#hour" + hour.slot;
+    // time section
     if (hour.past) {
       $(id).css("background-color", "rgba(11, 92, 11, 0.418)")
     }
@@ -113,7 +114,8 @@ function display(day) {
     else {
       $(id).css("background-color","rgba(67, 67, 202, 0.555)")
     }
-    // $(id).h5.text(hour.slot);
+    var slot = id + "slot"
+    $(slot).text(hour.slot);
   }
 }
 
