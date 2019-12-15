@@ -6,7 +6,7 @@ setInterval(function () {
   var now = getNow();
   $("#clock").text(now);
   checkTime(now);
-  display(day);
+  // display(day);
   return now;
 }, 1000);
 
@@ -104,6 +104,7 @@ function display(day) {
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
     var id = "#hour" + hour.slot;
+    // console.log("concatenated id within display() is: " + id)
     if (hour.past) {
       $(id).toggleClass("past");
     }
@@ -122,7 +123,7 @@ function push(hour, event) {
   hour.events.push(event);
 }
 
-debugger
+// debugger
 createObjects();
 display(day);
 for (var i = 0; i < day.length; i++) {
