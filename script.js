@@ -116,6 +116,8 @@ function display(day) {
     }
     var slot = id + "slot"
     $(slot).text(hour.slot);
+    var events = id + "events";
+    $(events); // need to somehow add array as a list
   }
 }
 
