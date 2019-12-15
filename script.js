@@ -25,7 +25,7 @@ function getNow() {
 function getHour() {
   var now = getNow();
   var hour = parseInt(now.charAt(0) + now.charAt(1));
-  console.log("hour return from getHour(): " + hour);
+  // console.log("hour return from getHour(): " + hour);
   return hour;
 }
 
@@ -73,7 +73,7 @@ function timeUpdate() {
 // will check and possibly update the past present future keys of the day obj
 function pastPresentFuture(day) {
   var hourNow = getHour();
-  console.log("hourNow (getHour() return within pastPresentFuture()) is: " + hourNow);
+  // console.log("hourNow (getHour() return within pastPresentFuture()) is: " + hourNow);
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
     if (hour.slot < hourNow) {
@@ -104,15 +104,14 @@ function display(day) {
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
     var id = "#hour" + hour.slot;
-    // console.log("concatenated id within display() is: " + id)
     if (hour.past) {
-      $(id).toggleClass("past");
+      $(id).css("background-color", "rgba(11, 92, 11, 0.418)")
     }
     else if (hour.present) {
-      $(id).toggleClass("present");
+      $(id).css("background-color","rgba(180, 1, 1, 0.377)")
     }
     else {
-      $(id).toggleClass("future");
+      $(id).css("background-color","rgba(67, 67, 202, 0.555)")
     }
     // $(id).h5.text(hour.slot);
   }
@@ -126,9 +125,9 @@ function push(hour, event) {
 // debugger
 createObjects();
 display(day);
-for (var i = 0; i < day.length; i++) {
-  console.log(day[i]);
-}
+// for (var i = 0; i < day.length; i++) {
+//   console.log(day[i]);
+// }
 
 
 // TEST JSON area
