@@ -98,17 +98,16 @@ function pullDayFromStorage(day) {
 
 // will update the front end
 function display(day) {
-  // debugger
   pastPresentFuture(day);
   // needs to loop through each hour and throw up the hr slot, and list events
+  // should display be higher order, and have two smaller functions for the events and hr slot?
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
     var id = "#hour" + hour.slot;
     var slot = id + "slot"
     $(slot).text(hour.slot);
     var eventsListId = id + "events";
-    console.log(eventsListId);
-    // debugger
+    $(eventsListId).empty();
     for (var j = 0; j < hour.events.length; j++) {
       var event = hour.events[j];
       $(eventsListId).append($("<li>").append(event));
@@ -125,6 +124,11 @@ $(".addEvent").on("click", function () {
 $("#eventAdd").on("click", function () {
   var event = $("#eventForm").val();
   eventArrayAdd(event);
+});
+
+$("#save").on("click", function() {
+  storage(day);
+  display(day);
 });
 
 function eventArrayAdd(event) {
