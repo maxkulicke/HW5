@@ -29,7 +29,6 @@ function getHour() {
 
 // will create all of the HR objects
 function createObjects() {
-  // get HR in here?
   for (var i = 9; i < 18; i++) {
     var hour = {
       slot: i,
@@ -51,7 +50,7 @@ function storage(day) {
   }
 }
 
-// checks the time, calls update every minute?
+// checks the time, calls update every minute
 function checkTime(now) {
   var second = parseInt(now.charAt(6) + now.charAt(7));
   if (second == 0) {
@@ -63,11 +62,10 @@ function checkTime(now) {
 function timeUpdate() {
   pastPresentFuture(day);
   storage(day);
-  display(day); // is this call needed?
-  // }
+  display(day);
 }
 
-// will check and possibly update the past present future keys of the day obj
+// will check and update the past present future keys of the day obj, color each block accordingly
 function pastPresentFuture(day) {
   var hourNow = getHour();
   for (var i = 0; i < day.length; i++) {
@@ -98,9 +96,10 @@ function pullDayFromStorage(day) {
 }
 
 
-// will update the front end (somehow?)
+// will update the front end
 function display(day) {
-  // needs to loop through each hour, and update pastpresentfuture colors, throw up the hr slot, and list events
+  pastPresentFuture(day);
+  // needs to loop through each hour and throw up the hr slot, and list events
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
     var id = "#hour" + hour.slot;
@@ -141,7 +140,7 @@ function displayEventsModal(hour) {
   $("#eventsListModal").empty();
   for (var i = 0; i < hour.events.length; i++) {
     var event = hour.events[i];
-    $("#eventsListModal").append($("<li>").append(event)); // check this line!!!!
+    $("#eventsListModal").append($("<li>").append(event));
   }
 }
 
@@ -151,12 +150,8 @@ function pushEvent(hour, event) {
 }
 
 // TEST CALLS
-// debugger
 createObjects();
 display(day);
-// for (var i = 0; i < day.length; i++) {
-//   console.log(day[i]);
-// }
 
 
 // TEST JSON area
