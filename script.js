@@ -73,7 +73,9 @@ function pastPresentFuture(day) {
     var id = "#hour" + hour.slot;
     if (hour.slot < hourNow) {
       hour.past = true;
-      $(id).css("background-color", "rgba(11, 92, 11, 0.418)")
+      $(id).css("background-color", "rgba(158, 167, 255, 0.418)")
+      var buttonId = id + "add";
+      $(buttonId).hide();
     }
     else if (hour.slot > hourNow) {
       hour.future = true;
@@ -81,7 +83,7 @@ function pastPresentFuture(day) {
     }
     else {
       hour.present = true;
-      $(id).css("background-color", "rgba(180, 1, 1, 0.377)")
+      $(id).css("background-color", "rgba(215, 78, 228, 0.377)")
     }
   }
 }
