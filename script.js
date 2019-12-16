@@ -1,23 +1,22 @@
 // global variables
 var day = []; // an array of hour objects
+var targetId = ""; // the target of an "Add Event" click
 
 setInterval(function () {
-  // run every 60 seconds instead of every second?
   var now = getNow();
   $("#clock").text(now);
   checkTime(now);
-  // display(day);
   return now;
 }, 1000);
 
 // TODO
 // onclick function for edit button
 // onclick function for update button
+// onclicks for modal buttons
 
 // returns the current time (string type)
 function getNow() {
   var now = moment().format('HH:mm:ss: A');
-  // console.log("now return from getNow(): " + now);
   return now;
 }
 
@@ -25,7 +24,6 @@ function getNow() {
 function getHour() {
   var now = getNow();
   var hour = parseInt(now.charAt(0) + now.charAt(1));
-  // console.log("hour return from getHour(): " + hour);
   return hour;
 }
 
@@ -63,17 +61,15 @@ function checkTime(now) {
 
 // will call pastPresentFuture(), display(); storage()
 function timeUpdate() {
-  // for (var i = 0; i < day.length; i++) {
-    pastPresentFuture(day);
-    storage(day);
-    display(day); // is this call needed?
+  pastPresentFuture(day);
+  storage(day);
+  display(day); // is this call needed?
   // }
 }
 
 // will check and possibly update the past present future keys of the day obj
 function pastPresentFuture(day) {
   var hourNow = getHour();
-  // console.log("hourNow (getHour() return within pastPresentFuture()) is: " + hourNow);
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
     if (hour.slot < hourNow) {
@@ -104,15 +100,15 @@ function display(day) {
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
     var id = "#hour" + hour.slot;
-    // time section
+    // time section -> make separate function??
     if (hour.past) {
       $(id).css("background-color", "rgba(11, 92, 11, 0.418)")
     }
     else if (hour.present) {
-      $(id).css("background-color","rgba(180, 1, 1, 0.377)")
+      $(id).css("background-color", "rgba(180, 1, 1, 0.377)")
     }
     else {
-      $(id).css("background-color","rgba(67, 67, 202, 0.555)")
+      $(id).css("background-color", "rgba(67, 67, 202, 0.555)")
     }
     var slot = id + "slot"
     $(slot).text(hour.slot);
@@ -121,11 +117,53 @@ function display(day) {
   }
 }
 
+$(".addEvent").on("click", function() {
+  targetId = event.target.id;
+})
+
+$("#eventAdd").on("click", function() {
+  var event = $("#eventForm").val();
+  eventArrayAdd(event);
+});
+
+function eventArrayAdd(event) {
+  var hour = getHourObjectFromId()
+  pushEvent(hour, event);
+  displayEventsModal(hour);
+}
+
+function getHourObjectFromId() {
+  var hourSlot = parseInt(targetId.charAt(4) + targetId.charAt(5))
+  for (var i = 0; i < day.length; i++) {
+    if (hourSlot = day[i].slot) {
+      return day[i];
+    }
+  }
+}
+
+function displayEventsModal(hour) {
+  // clear list first, each time?
+  $("#eventsListModal").empty();
+  // append all events back to list
+  for (var i = 0; i < hour.events.length; i++) {
+    var event = hour.events[i];
+    // will this work at all?
+    $("#eventsListModal").append($("<li>").append(event)); // check this line!!!!
+  }
+  // from StackOverflow
+  //   $('#content ul').append(
+  //     $('<li>').append(
+  //         $('<a>').attr('href','/user/messages').append(
+  //             $('<span>').attr('class', 'tab').append("Message center")
+  // )));
+}
+
 // will add user form input string (event) to hour obj [] of strings
-function push(hour, event) {
+function pushEvent(hour, event) {
   hour.events.push(event);
 }
 
+// TEST CALLS
 // debugger
 createObjects();
 display(day);
