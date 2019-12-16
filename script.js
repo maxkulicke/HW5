@@ -118,7 +118,12 @@ function display(day) {
 }
 
 $(".addEvent").on("click", function() {
+  alert(event.target.id);
   targetId = event.target.id;
+  console.log(targetId)
+  var hour = getHourObjectFromId();
+  console.log(hour);
+  displayEventsModal(hour);
 })
 
 $("#eventAdd").on("click", function() {
@@ -127,7 +132,9 @@ $("#eventAdd").on("click", function() {
 });
 
 function eventArrayAdd(event) {
+  // debugger
   var hour = getHourObjectFromId()
+  console.log(hour);
   pushEvent(hour, event);
   displayEventsModal(hour);
 }
@@ -135,7 +142,7 @@ function eventArrayAdd(event) {
 function getHourObjectFromId() {
   var hourSlot = parseInt(targetId.charAt(4) + targetId.charAt(5))
   for (var i = 0; i < day.length; i++) {
-    if (hourSlot = day[i].slot) {
+    if (hourSlot === day[i].slot) {
       return day[i];
     }
   }
@@ -149,6 +156,7 @@ function displayEventsModal(hour) {
     var event = hour.events[i];
     // will this work at all?
     $("#eventsListModal").append($("<li>").append(event)); // check this line!!!!
+    console.log(event);
   }
   // from StackOverflow
   //   $('#content ul').append(
