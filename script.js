@@ -72,14 +72,18 @@ function pastPresentFuture(day) {
   var hourNow = getHour();
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
+    var id = "#hour" + hour.slot;
     if (hour.slot < hourNow) {
       hour.past = true;
+      $(id).css("background-color", "rgba(11, 92, 11, 0.418)")
     }
     else if (hour.slot > hourNow) {
       hour.future = true;
+      $(id).css("background-color", "rgba(67, 67, 202, 0.555)")
     }
     else {
       hour.present = true;
+      $(id).css("background-color", "rgba(180, 1, 1, 0.377)")
     }
   }
 }
@@ -100,16 +104,6 @@ function display(day) {
   for (var i = 0; i < day.length; i++) {
     var hour = day[i];
     var id = "#hour" + hour.slot;
-    // time section -> make separate function??
-    if (hour.past) {
-      $(id).css("background-color", "rgba(11, 92, 11, 0.418)")
-    }
-    else if (hour.present) {
-      $(id).css("background-color", "rgba(180, 1, 1, 0.377)")
-    }
-    else {
-      $(id).css("background-color", "rgba(67, 67, 202, 0.555)")
-    }
     var slot = id + "slot"
     $(slot).text(hour.slot);
     var events = id + "events";
@@ -118,11 +112,8 @@ function display(day) {
 }
 
 $(".addEvent").on("click", function() {
-  alert(event.target.id);
   targetId = event.target.id;
-  console.log(targetId)
   var hour = getHourObjectFromId();
-  console.log(hour);
   displayEventsModal(hour);
 })
 
@@ -132,9 +123,7 @@ $("#eventAdd").on("click", function() {
 });
 
 function eventArrayAdd(event) {
-  // debugger
   var hour = getHourObjectFromId()
-  console.log(hour);
   pushEvent(hour, event);
   displayEventsModal(hour);
 }
@@ -149,21 +138,11 @@ function getHourObjectFromId() {
 }
 
 function displayEventsModal(hour) {
-  // clear list first, each time?
   $("#eventsListModal").empty();
-  // append all events back to list
   for (var i = 0; i < hour.events.length; i++) {
     var event = hour.events[i];
-    // will this work at all?
     $("#eventsListModal").append($("<li>").append(event)); // check this line!!!!
-    console.log(event);
   }
-  // from StackOverflow
-  //   $('#content ul').append(
-  //     $('<li>').append(
-  //         $('<a>').attr('href','/user/messages').append(
-  //             $('<span>').attr('class', 'tab').append("Message center")
-  // )));
 }
 
 // will add user form input string (event) to hour obj [] of strings
