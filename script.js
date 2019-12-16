@@ -98,6 +98,7 @@ function pullDayFromStorage(day) {
 
 // will update the front end
 function display(day) {
+  // debugger
   pastPresentFuture(day);
   // needs to loop through each hour and throw up the hr slot, and list events
   for (var i = 0; i < day.length; i++) {
@@ -105,18 +106,23 @@ function display(day) {
     var id = "#hour" + hour.slot;
     var slot = id + "slot"
     $(slot).text(hour.slot);
-    var events = id + "events";
-    $(events); // need to somehow add array as a list
+    var eventsListId = id + "events";
+    console.log(eventsListId);
+    // debugger
+    for (var j = 0; j < hour.events.length; j++) {
+      var event = hour.events[j];
+      $(eventsListId).append($("<li>").append(event));
+    }
   }
 }
 
-$(".addEvent").on("click", function() {
+$(".addEvent").on("click", function () {
   targetId = event.target.id;
   var hour = getHourObjectFromId();
   displayEventsModal(hour);
 })
 
-$("#eventAdd").on("click", function() {
+$("#eventAdd").on("click", function () {
   var event = $("#eventForm").val();
   eventArrayAdd(event);
 });
@@ -138,10 +144,11 @@ function getHourObjectFromId() {
 
 function displayEventsModal(hour) {
   $("#eventsListModal").empty();
+  // about to move this line!!!, stop here when undoing!!!
   for (var i = 0; i < hour.events.length; i++) {
     var event = hour.events[i];
     $("#eventsListModal").append($("<li>").append(event));
-  }
+}
 }
 
 // will add user form input string (event) to hour obj [] of strings
