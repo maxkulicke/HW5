@@ -1,7 +1,12 @@
 // global variables
 var day = []; // an array of hour objects
+day = pullDayFromStorage(day);
+for (var i = 0; i < day.length; i++) {
+  console.log(day[i]);
+}
 var targetId = ""; // the target of an "Add Event" click
 
+// interval
 setInterval(function () {
   var now = getNow();
   $("#clock").text(now);
@@ -9,10 +14,42 @@ setInterval(function () {
   return now;
 }, 1000);
 
-// TODO
-// onclick function for edit button
-// onclick function for update button
-// onclicks for modal buttons
+// onclicks
+
+$("#createDay").on("click", function () {
+  createObjects();
+  storage(day);
+  display(day);
+})
+
+$("#clearDay").on("click", function () {
+  clearDay(day);
+  $("cardDiv").empty();
+})
+
+$(".addEvent").on("click", function () {
+  targetId = event.target.id;
+  var hour = getHourObjectFromId();
+  displayEventsModal(hour);
+})
+
+$("#eventAdd").on("click", function () {
+  var event = $("#eventForm").val();
+  eventArrayAdd(event);
+});
+
+$("#save").on("click", function () {
+  storage(day);
+  display(day);
+});
+
+// utility functions
+
+// clears the day array, pushes it to storage
+function clearDay(day) {
+  day.length = 0;
+  storage(day);
+}
 
 // returns the current time (string type)
 function getNow() {
@@ -75,7 +112,7 @@ function pastPresentFuture(day) {
       hour.past = true;
       $(id).css("background-color", "rgba(158, 167, 255, 0.418)")
       var buttonId = id + "add";
-      $(buttonId).hide();
+      // $(buttonId).hide();
     }
     else if (hour.slot > hourNow) {
       hour.future = true;
@@ -88,6 +125,7 @@ function pastPresentFuture(day) {
   }
 }
 
+// pulls the day array as it was last stored in local storage
 function pullDayFromStorage(day) {
   for (var i = 0; i < day.length; i++) {
     var key = "hour" + day[i].slot;
@@ -117,28 +155,14 @@ function display(day) {
   }
 }
 
-$(".addEvent").on("click", function () {
-  targetId = event.target.id;
-  var hour = getHourObjectFromId();
-  displayEventsModal(hour);
-})
-
-$("#eventAdd").on("click", function () {
-  var event = $("#eventForm").val();
-  eventArrayAdd(event);
-});
-
-$("#save").on("click", function() {
-  storage(day);
-  display(day);
-});
-
+// adds an event string to object events array
 function eventArrayAdd(event) {
   var hour = getHourObjectFromId()
   pushEvent(hour, event);
   displayEventsModal(hour);
 }
 
+// finds the object targeted by the add event on click
 function getHourObjectFromId() {
   var hourSlot = parseInt(targetId.charAt(4) + targetId.charAt(5))
   for (var i = 0; i < day.length; i++) {
@@ -148,24 +172,19 @@ function getHourObjectFromId() {
   }
 }
 
+// clears the old events list display, reappends the entire list
 function displayEventsModal(hour) {
   $("#eventsListModal").empty();
-  // about to move this line!!!, stop here when undoing!!!
   for (var i = 0; i < hour.events.length; i++) {
     var event = hour.events[i];
     $("#eventsListModal").append($("<li>").append(event));
-}
+  }
 }
 
 // will add user form input string (event) to hour obj [] of strings
 function pushEvent(hour, event) {
   hour.events.push(event);
 }
-
-// TEST CALLS
-createObjects();
-display(day);
-
 
 // TEST JSON area
 // var testObject = { 'one': 1, 'two': 2, 'three': 3 };
