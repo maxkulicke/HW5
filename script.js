@@ -155,7 +155,6 @@ $(document).ready(function () {
     }
   }
 
-
   // this function is in charge of all of the hour cards and events lists
   function display(day) {
     pastPresentFuture(day);
