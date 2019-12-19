@@ -32,6 +32,7 @@ $(document).ready(function () {
   })
 
   $("#eventAdd").on("click", function () {
+    // debugger
     var event = $("#eventForm").val();
     eventArrayAdd(event);
     clearEventsModalForm();
@@ -187,7 +188,7 @@ $(document).ready(function () {
   // finds the object targeted by the add event on click
   function getHourObjectFromId() {
     var hourSlot = parseInt(targetId.charAt(4) + targetId.charAt(5))
-    day = pullDayFromStorage(day);
+    // day = pullDayFromStorage(day);
     for (var i = 0; i < day.length; i++) {
       if (hourSlot === day[i].slot) {
         return day[i];
@@ -206,8 +207,8 @@ $(document).ready(function () {
   }
 
   function clearEventsModalForm() {
-    $("#eventForm").empty();
-    $("#eventForm").text("");
+    // $("#eventForm").empty();
+    // $("#eventForm").text("");
   }
 
   // will add user form input string (event) to hour obj [] of strings
