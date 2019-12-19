@@ -33,6 +33,7 @@ $(document).ready(function () {
   $("#eventAdd").on("click", function () {
     var event = $("#eventForm").val();
     eventArrayAdd(event);
+    clearEventsModalForm();
   });
 
   $("#save").on("click", function () {
@@ -165,7 +166,7 @@ $(document).ready(function () {
       if (nextHourDisplay > 12) {
         nextHourDisplay -= 12;
       }
-      $(slot).text(hourDisplay + " - " + nextHourDisplay);
+      $(slot).text(hourDisplay + ":00");
       var eventsListId = id + "events";
       $(eventsListId).empty();
       for (var j = 0; j < hour.events.length; j++) {
@@ -196,10 +197,16 @@ $(document).ready(function () {
   // clears the old events list display, reappends the entire list
   function displayEventsModal(hour) {
     $("#eventsListModal").empty();
+    clearEventsModalForm();
     for (var i = 0; i < hour.events.length; i++) {
       var event = hour.events[i];
       $("#eventsListModal").append($("<li>").append(event));
     }
+  }
+  
+  function clearEventsModalForm() {
+    $("#eventForm").empty();
+    $("#eventForm").text("");
   }
 
   // will add user form input string (event) to hour obj [] of strings
