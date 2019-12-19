@@ -259,7 +259,7 @@ $(document).ready(function () {
     div.append($("<button>")
       .attr({
         "type": "button",
-        "class": "btn btn-dark addEvent",
+        "class": "btn btn-dark float-right addEvent",
         "id": "hour" + hourSlot + "add",
         "data-toggle": "modal",
         "data-target": "#editModal",
