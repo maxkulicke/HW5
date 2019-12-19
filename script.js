@@ -26,8 +26,7 @@ $(document).ready(function () {
 
   $(".addEvent").on("click", function () {
     targetId = event.target.id;
-    var hour = getHourObjectFromId();
-    displayEventsModal(hour);
+    displayEventsModal(getHourObjectFromId());
   })
 
   $("#eventAdd").on("click", function () {
@@ -69,8 +68,7 @@ $(document).ready(function () {
 
   // returns the current hour (09 - 17) (int type)
   function getHour() {
-    var now = getNow();
-    var hour = parseInt(now.charAt(0) + now.charAt(1));
+    var hour = parseInt(getNow().charAt(0) + getNow().charAt(1));
     return hour;
   }
 
@@ -178,7 +176,7 @@ $(document).ready(function () {
 
   // adds an event string to object events array
   function eventArrayAdd(event) {
-    var hour = getHourObjectFromId()
+    var hour = getHourObjectFromId();
     pushEvent(hour, event);
     displayEventsModal(hour);
   }
