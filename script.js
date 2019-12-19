@@ -4,6 +4,7 @@ $(document).ready(function () {
   var day = []; // an array of hour objects
   createObjects();
   day = pullDayFromStorage(day); // this line is important, not redundant
+  // deckMaker(day); bring this back
   display(day);
 
   var targetId = ""; // the target of an "Add Event" click
@@ -203,7 +204,7 @@ $(document).ready(function () {
       $("#eventsListModal").append($("<li>").append(event));
     }
   }
-  
+
   function clearEventsModalForm() {
     $("#eventForm").empty();
     $("#eventForm").text("");
@@ -212,6 +213,59 @@ $(document).ready(function () {
   // will add user form input string (event) to hour obj [] of strings
   function pushEvent(hour, event) {
     hour.events.push(event);
+  }
+
+  // the appenders
+  function deckMaker(day) {
+    for (var i = 0; i < day.length; i++) { // make this a forEach?
+      cardMaker(day[i]);
+    }
+  }
+
+  function cardMaker(hour) {
+    var cardDiv = divMaker();
+    innerCardMaker(cardDiv, hour.slot);
+    buttonMaker(cardDiv, hour.slot);
+  }
+
+
+  function divMaker() {
+    var deck = $("#cardDeck"); // can this line be eliminated?
+    var divClassCard = deck.append($("<div></div>")
+      .addClass("card")
+    );
+    var divClassCardBody = divClassCard.append($("<div></div>")
+      .addClass("card-body")
+    );
+    return divClassCardBody;
+  }
+
+  function innerCardMaker(div, hourSlot) {
+    div.append([
+      $("<h5></h5>")
+        .attr({
+          "class": "card-title",
+          "id": "hour" + hourSlot + "slot",
+        }),
+      $("<ul></ul>")
+        .attr({
+          "class": "card-text",
+          "id": "hour" + hourSlot + "events",
+        }),
+    ]);
+  }
+
+  function buttonMaker(div, hourSlot) {
+    div.append($("<button>")
+      .attr({
+        "type": "button",
+        "class": "btn btn-dark addEvent",
+        "id": "hour" + hourSlot + "add",
+        "data-toggle": "modal",
+        "data-target": "#editModal",
+      })
+    );
+    $("#hour" + hourSlot + "add").text("Add Event");
   }
 
 })
