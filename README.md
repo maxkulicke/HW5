@@ -15,3 +15,16 @@ UX:
 - i built the day planner i would want, or at least tried to. tried to pay attention to little detail things that would hopefully shape and direct a real user
 - tried to eliminate the possibility of unexpected or unwanted behaviors/actions (adding empty list events, accidentally clearing the day and it's data) 
 - tried to focus on little things that would help with an actual calendar (it should visually update without needing refresh, should change states on the hour, etc)
+
+observations/comments:
+in my effort to make a more interactive, robust, and usable day planner than the assignment specified, while trying to execute while observing a few self imposed goals/guidelines/restrictions, i feel like i learned a lot. While the short and discrete function method is really appealing, and very intuitive to me, i think i approached a certain limit in my ability to trace all the paths properly within a single file. particularly when certain higher order functions have a sort of lightning bolt pathway, where one call to a higher order function results in maybe 3 lower level calls, which each result in 4 more even lower level calls, it was wasy for me to lose track of what one function revision would do to all the calls it sees. I had issues with this particularly regarding storage and loading, and visual displays.
+
+I used a data/variable structure for this assignment that also seems to have pros and cons. my basic idea was:
+  - have a local array (day[]) of objects (hour) that can be acted and changed in multiple ways
+  - have a storage array that will always represent the most up to date version of all the hour objects.
+  - the local array would be used to push changes to storage
+  - the storage array would be used to ensure that the most recent saved version of the array was being used in the local array.
+
+while it seems overly complicated, it actually seemed necessary if I was going to be able to have the events modal interactive and responsive in the way that I wanted it to be from a user's perspective. It seemed important to be able to add and view multiple events in real time, and then not have them committed to local storage if it was unwanted.
+
+the cons to this approach are again, it was easy to confuse which was being used where, and when a push to or pull from storage might actually disrupt the functionality, or cause unforeseen errors.

@@ -20,6 +20,7 @@ $(document).ready(function () {
 
   $("#createConfirm").on("click", function () {
     clearDay(day);
+    clearEventsModal();
     createObjects();
     storage(day);
     display(day);
@@ -27,14 +28,15 @@ $(document).ready(function () {
 
   $(".addEvent").on("click", function () {
     targetId = event.target.id;
-    $("#eventsListModal").empty();
+    clearEventsModal();
     displayEventsModal(getHourObjectFromId());
   })
 
   $("#eventAdd").on("click", function () {
     var event = $("#eventForm").val();
     eventArrayAdd(event);
-    clearEventsModalForm();
+    clearEventsModal();
+    displayEventsModal(getHourObjectFromId());
   });
 
   $("#save").on("click", function () {
@@ -51,6 +53,7 @@ $(document).ready(function () {
       localStorage.removeItem(key);
     }
     storage(day);
+    day = pullDayFromStorage(day);
   }
 
   // returns the current time (string type)
@@ -119,6 +122,7 @@ $(document).ready(function () {
 
   // will call pastPresentFuture(), display(); storage()
   function timeUpdate() {
+    day = pullDayFromStorage(day);
     pastPresentFuture(day);
     storage(day);
     display(day);
@@ -148,30 +152,15 @@ $(document).ready(function () {
     }
   }
 
-  // will update the front end
-  // CLEAN THIS FUNCTION!
+  // this function is in charge of all of the hour cards and events lists
   function display(day) {
     pastPresentFuture(day);
-    // needs to loop through each hour and throw up the hr slot, and list events
-    // should display be higher order, and have two smaller functions for the events and hr slot?
     for (var i = 0; i < day.length; i++) {
       var hour = day[i];
       var id = "#hour" + hour.slot;
       var slot = id + "slot"
-      // ugly in here, clean up!
-
-      //function above end, line below in initial function
       $(slot).text(hourDisplayMaker(hour) + ":00");
       eventsListAppender(hour, id);
-      //function
-      //   function eventsListAppender (hour, id) {
-      //   var eventsListId = id + "events";
-      //   $(eventsListId).empty();
-      //   for (var j = 0; j < hour.events.length; j++) {
-      //     var event = hour.events[j];
-      //     $(eventsListId).append($("<li>").append(event));
-      //   }
-      // }
     }
   }
 
@@ -180,10 +169,6 @@ $(document).ready(function () {
     if (hourDisplay > 12) {
       hourDisplay -= 12;
     }
-    // var nextHourDisplay = hourDisplay + 1;
-    // if (nextHourDisplay > 12) {
-    //   nextHourDisplay -= 12;
-    // }
     return hourDisplay;
   }
 
@@ -216,15 +201,16 @@ $(document).ready(function () {
 
   // clears the old events list display, reappends the entire list
   function displayEventsModal(hour) {
-    $("#eventsListModal").empty();
-    clearEventsModalForm();
+    // $("#eventsListModal").empty();
+    clearEventsModal();
     for (var i = 0; i < hour.events.length; i++) {
       var event = hour.events[i];
       $("#eventsListModal").append($("<li>").append(event));
     }
   }
 
-  function clearEventsModalForm() {
+  function clearEventsModal() {
+    $("#eventsListModal").empty();
     $("#eventForm").empty();
     $("#eventForm").text("");
   }
