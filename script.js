@@ -21,8 +21,10 @@ $(document).ready(function () {
   $("#createConfirm").on("click", function () {
     clearDay(day);
     clearEventsModal();
+    // displayEventsModal(getHourObjectFromId());
     createObjects();
     storage(day);
+    day = pullDayFromStorage(day);
     display(day);
   })
 
@@ -41,6 +43,7 @@ $(document).ready(function () {
 
   $("#save").on("click", function () {
     storage(day);
+    day = pullDayFromStorage(day);
     display(day);
   });
 
@@ -130,27 +133,28 @@ $(document).ready(function () {
 
   // will check and update the past present future keys of the day obj, color each block accordingly
   function pastPresentFuture(day) {
-    var hourNow = getHour();
     for (var i = 0; i < day.length; i++) {
       var hour = day[i];
       var id = "#hour" + hour.slot;
-      // each of these a separate function?
-      if (hour.slot < hourNow) {
-        hour.past = true;
-        $(id).css("background-color", "rgba(158, 167, 255, 0.418)")
-        // var buttonId = id + "add";
-        // $(buttonId).hide();
-      }
-      else if (hour.slot > hourNow) {
-        hour.future = true;
-        $(id).css("background-color", "rgba(67, 67, 202, 0.555)")
-      }
-      else {
-        hour.present = true;
-        $(id).css("background-color", "rgba(215, 78, 228, 0.377)")
-      }
+      pastPresentFutureSort(hour, id);
     }
   }
+
+  function pastPresentFutureSort(hour, id) {
+    if (hour.slot < getHour()) {
+      hour.past = true;
+      $(id).css("background-color", "rgba(158, 167, 255, 0.418)")
+    }
+    else if (hour.slot > getHour()) {
+      hour.future = true;
+      $(id).css("background-color", "rgba(67, 67, 202, 0.555)")
+    }
+    else {
+      hour.present = true;
+      $(id).css("background-color", "rgba(215, 78, 228, 0.377)")
+    }
+  }
+
 
   // this function is in charge of all of the hour cards and events lists
   function display(day) {
