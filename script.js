@@ -32,7 +32,6 @@ $(document).ready(function () {
   })
 
   $("#eventAdd").on("click", function () {
-    // debugger
     var event = $("#eventForm").val();
     eventArrayAdd(event);
     clearEventsModalForm();
@@ -160,21 +159,40 @@ $(document).ready(function () {
       var id = "#hour" + hour.slot;
       var slot = id + "slot"
       // ugly in here, clean up!
-      var hourDisplay = hour.slot
-      if (hourDisplay > 12) {
-        hourDisplay -= 12;
-      }
-      var nextHourDisplay = hourDisplay + 1;
-      if (nextHourDisplay > 12) {
-        nextHourDisplay -= 12;
-      }
-      $(slot).text(hourDisplay + ":00");
-      var eventsListId = id + "events";
-      $(eventsListId).empty();
-      for (var j = 0; j < hour.events.length; j++) {
-        var event = hour.events[j];
-        $(eventsListId).append($("<li>").append(event));
-      }
+
+      //function above end, line below in initial function
+      $(slot).text(hourDisplayMaker(hour) + ":00");
+      eventsListAppender(hour, id);
+      //function
+      //   function eventsListAppender (hour, id) {
+      //   var eventsListId = id + "events";
+      //   $(eventsListId).empty();
+      //   for (var j = 0; j < hour.events.length; j++) {
+      //     var event = hour.events[j];
+      //     $(eventsListId).append($("<li>").append(event));
+      //   }
+      // }
+    }
+  }
+
+  function hourDisplayMaker(hour) {
+    var hourDisplay = hour.slot
+    if (hourDisplay > 12) {
+      hourDisplay -= 12;
+    }
+    // var nextHourDisplay = hourDisplay + 1;
+    // if (nextHourDisplay > 12) {
+    //   nextHourDisplay -= 12;
+    // }
+    return hourDisplay;
+  }
+
+  function eventsListAppender(hour, id) {
+    var eventsListId = id + "events";
+    $(eventsListId).empty();
+    for (var j = 0; j < hour.events.length; j++) {
+      var event = hour.events[j];
+      $(eventsListId).append($("<li>").append(event));
     }
   }
 
@@ -207,8 +225,8 @@ $(document).ready(function () {
   }
 
   function clearEventsModalForm() {
-    // $("#eventForm").empty();
-    // $("#eventForm").text("");
+    $("#eventForm").empty();
+    $("#eventForm").text("");
   }
 
   // will add user form input string (event) to hour obj [] of strings
@@ -236,7 +254,7 @@ $(document).ready(function () {
       .addClass("card")
     );
     var divClassCardBody = divClassCard.append($("<div></div>")
-      .addClass("card-body")
+      .addClass("card-body hourCard")
     );
     return divClassCardBody;
   }
