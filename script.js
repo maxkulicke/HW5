@@ -3,23 +3,16 @@ $(document).ready(function () {
   // global variables, opening calls
   var day = []; // an array of hour objects
   createObjects();
-  day = pullDayFromStorage(day);
-  // storageConsoleLog();
+  day = pullDayFromStorage(day); // this line is important, not redundant
   display(day);
-
-  // storageConsoleLog(); // clear later
-  for (var i = 0; i < day.length; i++) {
-    console.log(day[i]);
-  }
 
   var targetId = ""; // the target of an "Add Event" click
 
   // interval
   setInterval(function () {
-    var now = getNow();
-    $("#clock").text(now);
-    checkTime(now);
-    return now;
+    $("#clock").text(getClockDisplay());
+    $("#date").text(getDateDisplay());
+    checkTime(getNow());
   }, 1000);
 
   // onclicks
@@ -30,12 +23,6 @@ $(document).ready(function () {
     storage(day);
     display(day);
   })
-
-  // $("#clearDay").on("click", function () {
-  //   clearDay(day);
-  //   $("cardDiv").empty();
-  //   display(day);
-  // })
 
   $(".addEvent").on("click", function () {
     targetId = event.target.id;
@@ -55,22 +42,11 @@ $(document).ready(function () {
 
   // utility functions
 
-  // for testing
-  function storageConsoleLog() {
-    // console.log("storage console log:")
-    var newDay = pullDayFromStorage(day);
-    newDay.forEach(function (element) {
-      console.log("storage console log:")
-      console.log(element);
-    });
-  }
-
   // clears the day array, pushes it to storage
   function clearDay(day) {
     for (var i = 0; i < day.length; i++) {
       var key = "hour" + day[i].slot;
       localStorage.removeItem(key);
-      // console.log("in storage(): " + "key: " + key + " string: " + JSON.stringify(day[i]));
     }
     storage(day);
   }
@@ -78,6 +54,16 @@ $(document).ready(function () {
   // returns the current time (string type)
   function getNow() {
     var now = moment().format('HH:mm:ss: A');
+    return now;
+  }
+
+  function getDateDisplay() {
+    var now = moment().format('MMMM Do YYYY');;
+    return now;
+  }
+
+  function getClockDisplay() {
+    var now = moment().format('h:mm:ss a');;
     return now;
   }
 
@@ -105,26 +91,19 @@ $(document).ready(function () {
 
   // storage function, pushes obj array (day) to local storage
   function storage(day) {
-    console.log("storage() called!");
     for (var i = 0; i < day.length; i++) {
       var key = "hour" + day[i].slot;
       localStorage.setItem(key, JSON.stringify(day[i]));
-      // console.log("in storage(): " + "key: " + key + " string: " + JSON.stringify(day[i]));
     }
-    storageConsoleLog(); //clear later
   }
 
   // pulls the day array as it was last stored in local storage
   function pullDayFromStorage(day) {
-    console.log("pullDayFromStorage() called!")
-    // storageConsoleLog();
     var storedDay = [];
     for (var i = 0; i < day.length; i++) {
       var key = "hour" + day[i].slot;
       var hour = JSON.parse(localStorage.getItem(key)); // will this work, or do i need two lines?
-      console.log(hour);
       storedDay.push(hour);
-      console.log("day[] log from pullDayFromStorage() " + day[i]);
     }
     return storedDay;
   }
@@ -228,15 +207,4 @@ $(document).ready(function () {
     hour.events.push(event);
   }
 
-  // TEST JSON area
-  // var testObject = { 'one': 1, 'two': 2, 'three': 3 };
-
-  // Put the object into storage
-  // console.log(JSON.stringify(testObject));
-  // localStorage.setItem('testObject', JSON.stringify(testObject));
-
-  // Retrieve the object from storage
-  // var retrievedObject = localStorage.getItem('testObject');
-
-  // console.log('retrievedObject: ', JSON.parse(retrievedObject));
 })
