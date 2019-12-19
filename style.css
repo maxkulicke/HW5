@@ -9,3 +9,15 @@
 .future {
   background-color: rgba(67, 67, 202, 0.555);
 }
+
+.scrollDiv {
+  max-height: 30rem;
+  overflow-y: auto;
+}
+
+body {
+  background-image: url("images/tripleCloud.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

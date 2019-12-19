@@ -21,12 +21,13 @@
   <div class="row">
     <div class="col-md-5"></div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-dark addEvent" id="createDay">Create New Day</button>
+      <button type="button" class="btn btn-dark addEvent" id="createDay" data-toggle="modal"
+        data-target="#confirmModal">Create New Day</button>
     </div>
     <div class="col-md-5"></div>
   </div>
 
-  <div class="row" id="cardDiv">
+  <div class="row scrollDiv" id="cardDiv">
 
     <div class="col-md-1"></div>
 
@@ -146,6 +147,27 @@
         </div>
       </div>
     </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="confirmModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="card float-none">
+            <div class="card-body">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h5 class="card-title" id="cancelHeader">This action will erase your current calendar. Confirm or cancel:
+              </h5>
+              <br>
+              <br>
+              <button type="submit" class="btn btn-dark" id="createConfirm" data-dismiss="modal"
+                data-target="#confirmModal">confirm</button>
+              <button type="submit" class="btn btn-dark" id="createCancel" data-dismiss="modal"
+                data-target="#confirmModal">cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <script>
     </script>

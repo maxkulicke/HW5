@@ -18,7 +18,7 @@ $(document).ready(function () {
 
   // onclicks
 
-  $("#createDay").on("click", function () {
+  $("#createConfirm").on("click", function () {
     clearDay(day);
     createObjects();
     storage(day);
