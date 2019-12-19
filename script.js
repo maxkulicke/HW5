@@ -26,6 +26,7 @@ $(document).ready(function () {
 
   $(".addEvent").on("click", function () {
     targetId = event.target.id;
+    $("#eventsListModal").empty();
     displayEventsModal(getHourObjectFromId());
   })
 
@@ -184,6 +185,7 @@ $(document).ready(function () {
   // finds the object targeted by the add event on click
   function getHourObjectFromId() {
     var hourSlot = parseInt(targetId.charAt(4) + targetId.charAt(5))
+    day = pullDayFromStorage(day);
     for (var i = 0; i < day.length; i++) {
       if (hourSlot === day[i].slot) {
         return day[i];
