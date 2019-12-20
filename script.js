@@ -4,7 +4,12 @@ $(document).ready(function () {
   var day = []; // an array of hour objects
   createObjects();
   console.log(day);
-  day = pullDayFromStorage(day); // this line is important, not redundant
+  var storedDay = pullDayFromStorage(day);
+  if (storedDay[0] != null) {
+    clearDay(day);
+    day = pullDayFromStorage(day); // this line is important, not redundant
+  }
+  // day = pullDayFromStorage(day); // this line is important, not redundant
   // deckMaker(day); bring this back
   console.log(day);
 
