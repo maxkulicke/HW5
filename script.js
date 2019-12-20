@@ -3,15 +3,12 @@ $(document).ready(function () {
   // global variables, opening calls
   var day = []; // an array of hour objects
   createObjects();
-  console.log(day);
   var storedDay = pullDayFromStorage(day);
   if (storedDay[0] != null) {
-    clearDay(day);
     day = pullDayFromStorage(day); // this line is important, not redundant
   }
-  // day = pullDayFromStorage(day); // this line is important, not redundant
   // deckMaker(day); bring this back
-  console.log(day);
+
 
   display(day);
 
@@ -27,13 +24,12 @@ $(document).ready(function () {
   // onclicks
 
   $("#createConfirm").on("click", function () {
-    clearDay(day);
-    clearEventsModal();
-    // displayEventsModal(getHourObjectFromId());
+    day = clearDay(day);
     createObjects();
     storage(day);
     day = pullDayFromStorage(day);
     display(day);
+    clearEventsModal();
   })
 
   $(".addEvent").on("click", function () {
@@ -63,8 +59,8 @@ $(document).ready(function () {
       var key = "hour" + day[i].slot;
       localStorage.removeItem(key);
     }
-    storage(day);
-    day = pullDayFromStorage(day);
+    day = [];
+    return day;
   }
 
   // returns the current time (string type)

@@ -1,6 +1,13 @@
 # HW5
 Day Planner
 
+I made this way too complicated. I believe that I satisfied the criteria of the assignment, but in my effort to take this project to a higher level, I think I ended up biting off more than i could chew. a few outstanding issues that I would have preferred to resolve:
+
+- i wanted to avoid hardcoding my hour block cards in the HTML. i have written functions to generate them dynamically, and i'm mostly there, they just aren't nesting the divs properly and I won't have time to sort it out.
+- the clock loads way too slowly at the top of the page, and makes for a jerky launch of the page. i really don't like that. haven't figured out how to resolve that.
+- i wanted every list item (event) to be individually removable. this was a lower priority for me, but a perfect version of this site would have that functionality.
+- i simply could not figure out how to empty the text of the modal event input form. i have a bunch of javascript that should do it, but it doesn't quite. it's driving me crazy.
+
 a few overarching goals for this assignment:
 
 functions:
