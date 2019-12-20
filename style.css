@@ -1,15 +1,3 @@
-.past {
-  background-color: rgba(158, 167, 255, 0.418);
-}
-
-.present {
-  background-color: rgba(215, 78, 228, 0.377);
-}
-
-.future {
-  background-color: rgba(67, 67, 202, 0.555);
-}
-
 .scrollDiv {
   max-height: 30rem;
   overflow-y: auto;
