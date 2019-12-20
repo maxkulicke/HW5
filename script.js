@@ -3,8 +3,11 @@ $(document).ready(function () {
   // global variables, opening calls
   var day = []; // an array of hour objects
   createObjects();
+  console.log(day);
   day = pullDayFromStorage(day); // this line is important, not redundant
   // deckMaker(day); bring this back
+  console.log(day);
+
   display(day);
 
   var targetId = ""; // the target of an "Add Event" click
