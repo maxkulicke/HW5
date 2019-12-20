@@ -3,7 +3,6 @@ Day Planner
 
 I made this way too complicated. I believe that I satisfied the criteria of the assignment, but in my effort to take this project to a higher level, I think I ended up biting off more than i could chew. a few outstanding issues that I would have preferred to resolve:
 
-- i wanted to avoid hardcoding my hour block cards in the HTML. i have written functions to generate them dynamically, and i'm mostly there, they just aren't nesting the divs properly and I won't have time to sort it out.
 - the clock loads way too slowly at the top of the page, and makes for a jerky launch of the page. i really don't like that. haven't figured out how to resolve that.
 - i wanted every list item (event) to be individually removable. this was a lower priority for me, but a perfect version of this site would have that functionality.
 - i simply could not figure out how to empty the text of the modal event input form. i have a bunch of javascript that should do it, but it doesn't quite. it's driving me crazy.
@@ -24,7 +23,7 @@ UX:
 - tried to focus on little things that would help with an actual calendar (it should visually update without needing refresh, should change states on the hour, etc)
 
 observations/comments:
-in my effort to make a more interactive, robust, and usable day planner than the assignment specified, while trying to execute while observing a few self imposed goals/guidelines/restrictions, i feel like i learned a lot. While the short and discrete function method is really appealing, and very intuitive to me, i think i approached a certain limit in my ability to trace all the paths properly within a single file. particularly when certain higher order functions have a sort of lightning bolt pathway, where one call to a higher order function results in maybe 3 lower level calls, which each result in 4 more even lower level calls, it was wasy for me to lose track of what one function revision would do to all the calls it sees. I had issues with this particularly regarding storage and loading, and visual displays.
+in my effort to make a more interactive, robust, and usable day planner than the assignment specified, while trying to execute while observing a few self imposed goals/guidelines/restrictions, i feel like i learned a lot. While the short and discrete function method is really appealing, and very intuitive to me, i think i approached a certain limit in my ability to trace all the paths properly within a single file. particularly when certain higher order functions have a sort of lightning bolt pathway, where one call to a higher order function results in maybe 3 lower level calls, which each result in 4 more even lower level calls, it was wasy for me to lose track of what one function revision would do to all the calls it sees. I had issues with this particularly regarding storage and loading, and visual displays. In general, I encountered a lot of unforeseen consequences whenever I went to address one little thing. Too much interconnectivity?
 
 I used a data/variable structure for this assignment that also seems to have pros and cons. my basic idea was:
   - have a local array (day[]) of objects (hour) that can be acted and changed in multiple ways

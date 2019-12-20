@@ -1,15 +1,13 @@
 $(document).ready(function () {
 
   // global variables, opening calls
-  var day = []; // an array of hour objects
+  var day = []; // will be an array of hour objects
   createObjects();
   var storedDay = pullDayFromStorage(day);
   if (storedDay[0] != null) {
-    day = pullDayFromStorage(day); // this line is important, not redundant
+    day = pullDayFromStorage(day); // this line is important
   }
-  // deckMaker(day); bring this back
-
-
+  deckMaker(day);
   display(day);
 
   var targetId = ""; // the target of an "Add Event" click
@@ -98,7 +96,6 @@ $(document).ready(function () {
       day.push(hour);
     }
     pastPresentFuture(day);
-    // return day;
   }
 
   // storage function, pushes obj array (day) to local storage
@@ -199,7 +196,6 @@ $(document).ready(function () {
   // finds the object targeted by the add event on click
   function getHourObjectFromId() {
     var hourSlot = parseInt(targetId.charAt(4) + targetId.charAt(5))
-    // day = pullDayFromStorage(day);
     for (var i = 0; i < day.length; i++) {
       if (hourSlot === day[i].slot) {
         return day[i];
@@ -209,7 +205,6 @@ $(document).ready(function () {
 
   // clears the old events list display, reappends the entire list
   function displayEventsModal(hour) {
-    // $("#eventsListModal").empty();
     clearEventsModal();
     for (var i = 0; i < hour.events.length; i++) {
       var event = hour.events[i];
@@ -236,20 +231,23 @@ $(document).ready(function () {
   }
 
   function cardMaker(hour) {
-    var cardDiv = divMaker();
+    var cardDiv = divMaker(hour.slot);
     innerCardMaker(cardDiv, hour.slot);
     buttonMaker(cardDiv, hour.slot);
   }
 
-
-  function divMaker() {
+  // a little messy, would love to clean up with more time
+  function divMaker(hourSlot) {
     var deck = $("#cardDeck"); // can this line be eliminated?
-    var divClassCard = deck.append($("<div></div>")
-      .addClass("card")
-    );
-    var divClassCardBody = divClassCard.append($("<div></div>")
-      .addClass("card-body hourCard")
-    );
+    var divClassCard = $("<div></div>")
+      .addClass("card");
+    deck.append(divClassCard);
+    var divClassCardBody = $("<div></div>")
+      .attr({
+        "class": "card-body hourCard hour" + hourSlot,
+        "id": "hour" + hourSlot,
+      });
+    divClassCard.append(divClassCardBody);
     return divClassCardBody;
   }
 

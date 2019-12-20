@@ -16,8 +16,10 @@
 <body>
 
   <!-- date & clock header -->
-  <h1 id="date"></h1>
-  <h1 id="clock"></h1>
+  <h2 id="date"></h1>
+  <h2 id="clock"></h1>
+
+  <!-- create day button -->
   <div class="row">
     <div class="col-md-5"></div>
     <div class="col-md-2">
@@ -27,162 +29,83 @@
     <div class="col-md-5"></div>
   </div>
 
+  <br>
+
   <div class="row scrollDiv" id="cardDiv">
 
     <div class="col-md-1"></div>
 
-    <div class="col-md-10" id="cardDeck">
+    <div class="col-md-10" id="cardDeck"></div>
 
-      <div class="card">
-        <div class="card-body hourCard" id="hour9">
-          <h5 class="card-title" id="hour9slot"></h5>
-          <ul class="card-text" id="hour9events"></ul>
-          <button type="button" class="btn btn-dark float-right addEvent" data-toggle="modal" data-target="#editModal"
-            id="hour9add">Add Event</button>
-        </div>
-      </div>
+    <div class="col-md-1"></div>
+  </div>
 
-      <div class="card">
-        <div class="card-body hourCard" id="hour10">
-          <h5 class="card-title" id="hour10slot"></h5>
-          <ul class="card-text" id="hour10events"></ul>
-          <button type="button" class="btn btn-dark float-right addEvent" data-toggle="modal" data-target="#editModal"
-            id="hour10add">Add Event</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body hourCard" id="hour11">
-          <h5 class="card-title" id="hour11slot"></h5>
-          <ul class="card-text" id="hour11events"></ul>
-          <button type="button" class="btn btn-dark float-right addEvent" data-toggle="modal" data-target="#editModal"
-            id="hour11add">Add Event</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body hourCard" id="hour12">
-          <h5 class="card-title" id="hour12slot"></h5>
-          <ul class="card-text" id="hour12events"></ul>
-          <button type="button" class="btn btn-dark float-right addEvent" data-toggle="modal" data-target="#editModal"
-            id="hour12add">Add Event</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body hourCard" id="hour13">
-          <h5 class="card-title" id="hour13slot"></h5>
-          <ul class="card-text" id="hour13events"></ul>
-          <button type="button" class="btn btn-dark float-right addEvent" data-toggle="modal" data-target="#editModal"
-            id="hour13add">Add Event</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body hourCard" id="hour14">
-          <h5 class="card-title" id="hour14slot"></h5>
-          <ul class="card-text" id="hour14events"></ul>
-          <button type="button" class="btn btn-dark float-right addEvent" data-toggle="modal" data-target="#editModal"
-            id="hour14add">Add Event</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body hourCard" id="hour15">
-          <h5 class="card-title" id="hour15slot"></h5>
-          <ul class="card-text" id="hour15events"></ul>
-          <button type="button" class="btn btn-dark float-right addEvent" data-toggle="modal" data-target="#editModal"
-            id="hour15add">Add Event</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body hourCard" id="hour16">
-          <h5 class="card-title" id="hour16slot"></h5>
-          <ul class="card-text" id="hour16events"></ul>
-          <button type="button" class="btn btn-dark float-right addEvent" data-toggle="modal" data-target="#editModal"
-            id="hour16add">Add Event</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body hourCard" id="hour17">
-          <h5 class="card-title" id="hour17slot"></h5>
-          <ul class="card-text" id="hour17events"></ul>
-          <button type="button" class="btn btn-dark float-right addEvent" data-toggle="modal" data-target="#editModal"
-            id="hour17add">Add Event</button>
-        </div>
-      </div>
-
-      <div class="col-md-1"></div>
-    </div>
-
-    <!-- edit modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="editModal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="card float-none">
-            <div class="card-body">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h5 class="card-title" id="modalHeader">Display Hour Slot Here</h5>
-              <br>
-              <div id="eventsListModalDiv">
-                <ul id="eventsListModal">
-                </ul>
-              </div>
-              <br>
-              <br>
-              <h6 class="card-subtitle mb-2 text-muted" id="addEventHeader">Add New Event</h6>
-              <div class="form-group">
-                <input type="event" class="form-control" id="eventForm" placeholder="New Event">
-              </div>
-              <button type="submit" class="btn btn-dark" id="eventAdd">Add</button>
-              <br>
-              <br>
-              <br>
-              <button type="submit" class="btn btn-dark" id="save" data-dismiss="modal" data-target="#editModal">Save &
-                Exit</button>
+  <!-- edit modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="card float-none">
+          <div class="card-body">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h5 class="card-title" id="modalHeader">Display Hour Slot Here</h5>
+            <br>
+            <div id="eventsListModalDiv">
+              <ul id="eventsListModal">
+              </ul>
             </div>
+            <br>
+            <br>
+            <h6 class="card-subtitle mb-2 text-muted" id="addEventHeader">Add New Event</h6>
+            <div class="form-group">
+              <input type="event" class="form-control" id="eventForm" placeholder="New Event">
+            </div>
+            <button type="submit" class="btn btn-dark" id="eventAdd">Add</button>
+            <br>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-dark" id="save" data-dismiss="modal" data-target="#editModal">Save &
+              Exit</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal" tabindex="-1" role="dialog" id="confirmModal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="card float-none">
-            <div class="card-body">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h5 class="card-title" id="cancelHeader">This action will erase your current calendar. Confirm or cancel:
-              </h5>
-              <br>
-              <br>
-              <button type="submit" class="btn btn-dark" id="createConfirm" data-dismiss="modal"
-                data-target="#confirmModal">confirm</button>
-              <button type="submit" class="btn btn-dark" id="createCancel" data-dismiss="modal"
-                data-target="#confirmModal">cancel</button>
-            </div>
+  <div class="modal" tabindex="-1" role="dialog" id="confirmModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="card float-none">
+          <div class="card-body">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h5 class="card-title" id="cancelHeader">This action will erase your current calendar. Confirm or cancel:
+            </h5>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-dark" id="createConfirm" data-dismiss="modal"
+              data-target="#confirmModal">confirm</button>
+            <button type="submit" class="btn btn-dark" id="createCancel" data-dismiss="modal"
+              data-target="#confirmModal">cancel</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
 
-    <script>
-    </script>
+  <script>
+  </script>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
