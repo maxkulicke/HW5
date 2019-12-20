@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
   // global variables, opening calls
-  // var day = []; // an array of hour objects
-  var day = createObjects();
+  var day = []; // an array of hour objects
+  createObjects();
   console.log(day);
   day = pullDayFromStorage(day); // this line is important, not redundant
   // deckMaker(day); bring this back
@@ -97,7 +97,7 @@ $(document).ready(function () {
       day.push(hour);
     }
     pastPresentFuture(day);
-    return day;
+    // return day;
   }
 
   // storage function, pushes obj array (day) to local storage
