@@ -1,6 +1,8 @@
 # HW5
 Day Planner
 
+https://maxkulicke.github.io/HW5/
+
 I made this way too complicated. I believe that I satisfied the criteria of the assignment, but in my effort to take this project to a higher level, I think I ended up biting off more than i could chew. a few outstanding issues that I would have preferred to resolve:
 
 - the clock loads way too slowly at the top of the page, and makes for a jerky launch of the page. i really don't like that. haven't figured out how to resolve that.
